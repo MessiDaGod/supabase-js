@@ -3111,7 +3111,7 @@
               RealtimeClient: () => x,
               RealtimePresence: () => p,
             })
-          const r = { 'X-Client-Info': 'realtime-js/2.9.5' }
+          const r = { 'X-Client-Info': 'realtime-js/0.0.0-automated' }
           var i, n, o, a, c, l, h
           !(function (e) {
             ;(e[(e.connecting = 0)] = 'connecting'),
@@ -3947,8 +3947,11 @@
             _getPayloadRecords(e) {
               const t = { new: {}, old: {} }
               return (
-                ('INSERT' !== e.type && 'UPDATE' !== e.type) || (t.new = g(e.columns, e.record)),
+                ('INSERT' !== e.type && 'UPDATE' !== e.type) ||
+                  !e.record ||
+                  (t.new = g(e.columns, e.record)),
                 ('UPDATE' !== e.type && 'DELETE' !== e.type) ||
+                  !e.old_record ||
                   (t.old = g(e.columns, e.old_record)),
                 t
               )
